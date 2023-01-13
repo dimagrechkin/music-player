@@ -1,0 +1,23 @@
+<template>
+  <div :class="styles.activityCard">
+    <div :class="styles.profileAvatarContainer">
+      <!-- <Image alt="" src="{avatar}" :class-name="{styles.avatar}" width="{50}" height="{50}" />  TODO  -->
+    </div>
+    <div>
+      <div>{{ title }}</div>
+      <div class="opacity-60">{{ subTitle }}</div>
+    </div>
+  </div>
+</template>
+<script lang="ts" setup>
+interface Props {
+  title: string;
+  subTitle: string;
+}
+defineProps<Props>();
+const styles = {
+  profileAvatarContainer: `w-14 h-14 rounded-full -ml-2 mr-3`,
+  activityCard: `flex mb-6 cursor-pointer hover:opacity-50`,
+  avatar: `rounded-full object-cover`,
+};
+</script>
