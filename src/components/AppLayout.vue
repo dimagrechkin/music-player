@@ -1,11 +1,13 @@
 <template>
-  <div class="main-content">
+  <div class="flex">
     <slot name="sidebar"></slot>
-
-    <slot name="header"></slot>
-    <div class="main-scroll">
-      <slot name="main"></slot>
+    <div class="w-full">
+      <slot name="header"></slot>
+      <div class="main-scroll">
+        <slot name="main"></slot>
+      </div>
     </div>
+    <slot name="activity"></slot>
   </div>
 </template>
 
