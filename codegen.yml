@@ -1,0 +1,15 @@
+schema: 'src/graphql/*.graphql'
+documents: 'src/graphql/*.graphql'
+generates:
+  src/graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-vue-apollo
+      - fragment-matcher
+    config:
+      dedupeFragments: true
+      fetcher:
+        func: './auth-fetcher#fetcher'
+        isReactHook: false
+      # withCompositionFunctions: true

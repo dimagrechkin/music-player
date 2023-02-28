@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true,
+    "vue/setup-compiler-macros": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "plugin:vue/vue3-recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "parser": "vue-eslint-parser", // parse <template> tags
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "warn",
+    "vue/no-unused-properties": "warn",
+    "vue/component-api-style": "error" // Add if we want to enforce no use of Options API
+  }
+}
