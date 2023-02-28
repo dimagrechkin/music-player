@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { createApp } from 'vue';
 import { VueQueryPlugin } from '@tanstack/vue-query';
 import { DefaultApolloClient } from '@vue/apollo-composable';
@@ -8,6 +9,8 @@ import piniaPersist from 'pinia-plugin-persist';
 import router from './router';
 import './style.css';
 import App from './App.vue';
+
+window.Buffer = window.Buffer || Buffer;
 
 const pinia = createPinia();
 pinia.use(piniaPersist);

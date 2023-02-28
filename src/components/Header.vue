@@ -1,14 +1,8 @@
 <template>
   <div class="header-container">
-    <div
-      @click="
-        router.push({
-          name: appConfig.routes.profiles.module,
-        })
-      "
-      class="home-link"
-    >
-      Profiles
+    <div class="left">
+      <div @click="moveToProfilePage" class="home-link">Profiles</div>
+      <div @click="moveToCreatePage">Create</div>
     </div>
     <div class="right">
       <app-sign-in-button />
@@ -24,6 +18,16 @@ import AppSignInButton from './Button.vue';
 import appConfig from '@/utils/config';
 
 const router = useRouter();
+
+const moveToProfilePage = () =>
+  router.push({
+    name: appConfig.routes.profiles.module,
+  });
+
+const moveToCreatePage = () =>
+  router.push({
+    name: appConfig.routes.profiles.create,
+  });
 </script>
 
 <style>
@@ -49,6 +53,13 @@ const router = useRouter();
 
 .home-link {
   margin-left: 16px;
+}
+
+.left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
 }
 
 .margin-right {

@@ -132,20 +132,7 @@ onResult(async () => {
 
   signature.value = await signedTypeData(domain, types, value);
   const { v, r, s } = splitSignature(signature.value);
-  console.log(
-    {
-      follower: account.value,
-      profileIds: value.profileIds,
-      data: value.datas,
-      sig: {
-        v,
-        r,
-        s,
-        deadline: value.deadline,
-      },
-    },
-    '  console.log(v, r, s);'
-  );
+
   if (value.profileIds && value?.datas && account.value && v && r && s) {
     console.log(value.profileIds[0], value?.datas[0], account.value, v.toString(), r, s, 'account.value');
     console.log(lensHub, 'lensHub');
