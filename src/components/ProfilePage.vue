@@ -108,7 +108,6 @@ const loginAccount = async () => {
   const { accessToken, refreshToken } = data.authenticate;
 
   setAccessToken(accessToken, refreshToken);
-  console.log(accessToken, 'accessToken');
 };
 const { mutate: requestTypeData } = useCreateFollowTypedDataMutation();
 
@@ -117,7 +116,6 @@ const signature = ref();
 
 onResult(async () => {
   await loginAccount();
-  console.log(profilesData.value?.profile, 'fsdfsdf');
 
   typedData.value = await requestTypeData({
     request: {
@@ -133,25 +131,17 @@ onResult(async () => {
   signature.value = await signedTypeData(domain, types, value);
   const { v, r, s } = splitSignature(signature.value);
 
-  if (value.profileIds && value?.datas && account.value && v && r && s) {
-    console.log(value.profileIds[0], value?.datas[0], account.value, v.toString(), r, s, 'account.value');
-    console.log(lensHub, 'lensHub');
-    const decimalPrecision = 11;
-    const tes = String(value.profileIds[0]) + '0'.repeat(decimalPrecision);
-    console.log(tes, 'tes');
-
-    await lensHub.followWithSig({
-      follower: account.value,
-      profileIds: value.profileIds,
-      data: value.datas,
-      sig: {
-        v,
-        r,
-        s,
-        deadline: value?.deadline,
-      },
-    });
-  }
+  await lensHub.followWithSig({
+    follower: account.value,
+    profileIds: value.profileIds,
+    data: value.datas,
+    sig: {
+      v,
+      r,
+      s,
+      deadline: value?.deadline,
+    },
+  });
 });
 
 const {

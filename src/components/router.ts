@@ -16,7 +16,7 @@ export const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: appConfig.routes.profiles.module,
+        name: appConfig.routes.profiles.moduleIndex,
         component: ProfileIndexView,
       },
       {

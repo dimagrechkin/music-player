@@ -1,5 +1,5 @@
 <template>
-  <button v-if="!account" class="connect-button" :onclick="setAccountAddress">Connect to Metamask</button>
+  <button v-if="!account" class="connect-button" :onclick="refetchChallenge">Connect to Metamask</button>
   <button v-if="!cryptoStore.readAccessToken" class="connect-button" :onclick="loginAccount">
     Login to Lens Protocol
   </button>
@@ -21,16 +21,21 @@ const { account } = storeToRefs(cryptoStore);
 
 let signature = ref<string>();
 
-const { result } = useChallengeQuery(
+const { result, refetch } = useChallengeQuery(
   () => ({
     request: {
       address: account.value,
     },
   }),
-  {
+  () => ({
     enabled: !!account.value,
-  }
+  })
 );
+
+const refetchChallenge = async () => {
+  await setAccountAddress();
+  await refetch();
+};
 
 const privateKey = '0x4f06b87ea72ed5bcd24812bdb0c54397cd4b66aab8f62975408e6d526bf7461c'; //TODO move key to env
 
@@ -63,14 +68,14 @@ const loginAccount = async () => {
 };
 
 const profileQuery = useDefaultProfileQuery(
-  {
+  () => ({
     request: {
       ethereumAddress: account.value,
     },
-  },
-  {
+  }),
+  () => ({
     enabled: !!account.value,
-  }
+  })
 );
 </script>
 <style>

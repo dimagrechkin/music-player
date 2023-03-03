@@ -82,7 +82,6 @@ const loginAccount = async () => {
   const { accessToken, refreshToken } = data.authenticate;
 
   setAccessToken(accessToken, refreshToken);
-  console.log(accessToken, 'accessToken');
 };
 
 const { mutate: requestTypedData } = useCreatePostTypedDataMutation();

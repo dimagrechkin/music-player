@@ -21,9 +21,7 @@ const httpLink = createHttpLink({
   // TODO make access token conditional
   uri: 'https://api-mumbai.lens.dev',
   headers: {
-    'x-access-token': sessionStorage.getItem('user')
-      ? JSON.parse(JSON.parse(sessionStorage.getItem('user') || '').accessToken).accessToken || ''
-      : undefined,
+    ...(sessionStorage.getItem('user')?.accessToken && { 'x-access-token': 'woof' }),
     'Access-Control-Allow-Origin': '*',
   },
 });

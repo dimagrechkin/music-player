@@ -21,7 +21,7 @@ const router = useRouter();
 
 const moveToProfilePage = () =>
   router.push({
-    name: appConfig.routes.profiles.module,
+    name: appConfig.routes.profiles.moduleIndex,
   });
 
 const moveToCreatePage = () =>
