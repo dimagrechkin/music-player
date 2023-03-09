@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <div class="left">
+    <div class="left" v-if="isLoggedIn">
       <div @click="moveToProfilePage" class="home-link">Profiles</div>
       <div @click="moveToCreatePage">Create</div>
     </div>
@@ -16,6 +16,12 @@ import { useRouter } from 'vue-router';
 
 import AppSignInButton from './Button.vue';
 import appConfig from '@/utils/config';
+
+interface Props {
+  isLoggedIn: boolean ;
+}
+
+defineProps<Props>();
 
 const router = useRouter();
 

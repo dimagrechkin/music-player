@@ -17,11 +17,9 @@ pinia.use(piniaPersist);
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  // You should use an absolute URL here
-  // TODO make access token conditional
   uri: 'https://api-mumbai.lens.dev',
   headers: {
-    ...(sessionStorage.getItem('user')?.accessToken && { 'x-access-token': 'woof' }),
+    ...(JSON.parse(sessionStorage.getItem('user')).accessToken && { 'x-access-token': JSON.parse(JSON.parse(sessionStorage.getItem('user')).accessToken).accessToken}),
     'Access-Control-Allow-Origin': '*',
   },
 });

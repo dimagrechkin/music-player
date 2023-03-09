@@ -37,10 +37,8 @@ const refetchChallenge = async () => {
   await refetch();
 };
 
-const privateKey = '0x4f06b87ea72ed5bcd24812bdb0c54397cd4b66aab8f62975408e6d526bf7461c'; //TODO move key to env
-
 const getSigner = () => {
-  return new ethers.Wallet(privateKey);
+  return new ethers.Wallet(String(import.meta.env.VITE_PK) as string);
 };
 
 const signText = (text: string) => {

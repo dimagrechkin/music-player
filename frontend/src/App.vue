@@ -1,19 +1,14 @@
 <template>
   <div class="header">
-    <app-header></app-header>
+    <app-header :is-logged-in="isLoggedIn"></app-header>
   </div>
   <div class="body">
-    <!-- <app-button></app-button>
-    <app-profiles></app-profiles> -->
-    <router-view :key="$route.path"></router-view>
+    <router-view v-if="isLoggedIn" :key="$route.path"></router-view>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import AppButton from './components/Button.vue';
-import NestedRouterLayout from '@/layouts/NestedRouterLayout.vue';
+import { onMounted, computed } from 'vue';
 import AppHeader from './components/Header.vue';
-import AppProfiles from './components/Profiles.vue';
 import { useRefreshMutation } from './graphql/generated';
 import { isTokenExpire } from './lib/auth/helpers';
 import { useCryptoStore } from './stores/crypto';
@@ -23,6 +18,8 @@ onMounted(() => {
 });
 
 const store = useCryptoStore();
+
+const isLoggedIn = computed(()=> !!store.account)
 
 const { mutate: getToken } = useRefreshMutation();
 
@@ -46,7 +43,7 @@ const refreshAccessToken = async () => {
 };
 </script>
 
-<style scoped>
+<style>
 body,
 html {
   padding: 0;
@@ -54,8 +51,9 @@ html {
   width: 100%;
   min-height: 100vh;
 }
+
 body {
-  background-color: black;
+  background: black;
 }
 
 .body {
@@ -65,6 +63,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .postsContainer {
   display: flex;
   flex-direction: column;

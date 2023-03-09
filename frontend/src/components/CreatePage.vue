@@ -5,6 +5,8 @@
       <div class="input-container"><input v-model="text" type="text" placeholder="Title" /></div>
       <div class="input-container"><textarea v-model="description" placeholder="Description"></textarea></div>
       <div class="input-container"><textarea v-model="content" placeholder="Content"></textarea></div>
+      <div class="input-container white center" @click="onPost">apply</div>
+      <div class="white" v-if="validationError">please feel every field</div>
     </div>
   </div>
 </template>
@@ -34,16 +36,17 @@ const file = ref(null);
 const text = ref('');
 const description = ref('');
 const content = ref('');
+const validationError = ref(false);
 const cryptoStore = useCryptoStore();
 const { account } = storeToRefs(cryptoStore);
 
 const handleFileUpload = async () => {
-  console.log('selected file', file?.value?.files, text.value, description.value);
+  console.log('selected file', file?.value?.files, text.value, description.value); //TODO create image upload feature
 };
 
 let signTextSignature = ref<string>();
 
-const { result: challengeREsult } = useChallengeQuery(
+const { result: challengeResult } = useChallengeQuery(
   () => ({
     request: {
       address: account.value,
@@ -54,10 +57,8 @@ const { result: challengeREsult } = useChallengeQuery(
   }
 );
 
-const privateKey = '0x4f06b87ea72ed5bcd24812bdb0c54397cd4b66aab8f62975408e6d526bf7461c'; //TODO move key to env
-
 const getSigner = () => {
-  return new ethers.Wallet(privateKey);
+  return new ethers.Wallet(String(import.meta.env.VITE_PK) as string);
 };
 
 const signText = (text: string) => {
@@ -69,8 +70,8 @@ const { mutate: sendSignedMessage } = useAuthenticateMutation();
 const { setAccountAddress, setAccessToken } = useCryptoStore();
 
 const loginAccount = async () => {
-  await signText(challengeREsult?.value?.challenge.text);
-  signTextSignature.value = await signText(challengeREsult?.value?.challenge.text);
+  await signText(challengeResult?.value?.challenge.text);
+  signTextSignature.value = await signText(challengeResult?.value?.challenge.text);
 
   const { data } = await sendSignedMessage({
     request: {
@@ -86,7 +87,7 @@ const loginAccount = async () => {
 
 const { mutate: requestTypedData } = useCreatePostTypedDataMutation();
 
-const { result, onResult } = useDefaultProfileQuery(
+const { result } = useDefaultProfileQuery(
   {
     request: {
       ethereumAddress: account.value,
@@ -97,7 +98,9 @@ const { result, onResult } = useDefaultProfileQuery(
   }
 );
 
-onResult(async () => {
+const onPost = async() => {
+  validationError.value = false;
+  if(description.value && text.value && content.value){
   await loginAccount();
   const ipfsResult = await uploadIpfs<Metadata>({
     version: '2.0.0',
@@ -149,12 +152,17 @@ onResult(async () => {
       deadline: value.deadline,
     },
   });
-});
+  }else{
+    validationError.value = true;
+  }
+ 
+}
+
 </script>
 
 <style>
 .white {
-  background-color: white;
+  color: white;
 }
 
 .container {
@@ -175,5 +183,13 @@ onResult(async () => {
   margin: 16px;
   border-radius: 16px;
   border: 1px solid white;
+}
+
+.center{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

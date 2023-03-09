@@ -4,10 +4,8 @@ import { ethers, Wallet } from 'ethers';
 
 export const ethersProvider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/');
 
-const privateKey = '0x4f06b87ea72ed5bcd24812bdb0c54397cd4b66aab8f62975408e6d526bf7461c'; //TODO move key to env
-
 export const getSigner = () => {
-  return new Wallet(privateKey, ethersProvider);
+  return new Wallet(String(import.meta.env.VITE_PK) as string, ethersProvider);
 };
 
 export const imgConverter = (url: string) => {

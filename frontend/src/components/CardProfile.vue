@@ -4,7 +4,7 @@
       <img
         v-if="publication.metadata.media.length > 0"
         class="cardProfileProfileImage"
-        :src="imgConverter(publication?.profile?.picture?.original?.url || '')"
+        :src="imgConverter(publication?.profile?.picture?.original?.url || '')|| defaultProfileImage"
         :alt="publication.metadata.name || publication.profile.handle"
       />
       <p class="cardProfileProfileName">
@@ -42,10 +42,6 @@ interface Props {
   publication: ExplorePublicationsQuery['explorePublications']['items'][0];
 }
 
-// const imgss = computed(() =>
-//   props.publication?.profile?.picture?.original?.url.replace('ipfs://', 'https://ipfs.io/ipfs/')
-// );
-
 const openProfilePage = (id: string) =>
   router.push({
     name: appConfig.routes.profiles.singleIndex,
@@ -53,6 +49,8 @@ const openProfilePage = (id: string) =>
   });
 
 defineProps<Props>();
+
+const defaultProfileImage = 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
 </script>
 
 <style>
