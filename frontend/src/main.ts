@@ -19,7 +19,7 @@ pinia.use(piniaPersist);
 const httpLink = createHttpLink({
   uri: 'https://api-mumbai.lens.dev',
   headers: {
-    ...(JSON.parse(sessionStorage.getItem('user')).accessToken && { 'x-access-token': JSON.parse(JSON.parse(sessionStorage.getItem('user')).accessToken).accessToken}),
+    ...(JSON.parse(sessionStorage.getItem('user'))?.accessToken && { 'x-access-token': JSON.parse(JSON.parse(sessionStorage.getItem('user')).accessToken).accessToken}),
     'Access-Control-Allow-Origin': '*',
   },
 });
