@@ -1,0 +1,19 @@
+<svg width="7px" height="14px" viewBox="0 0 7 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M0.99949544,13.9998289 C0.77349544,13.9998289 0.54649544,13.9238289 0.35949544,13.7678289 C-0.0645045598,13.4148289 -0.12150456,12.7838289 0.23149544,12.3598289 L4.70749544,6.98882891 L0.39249544,1.62682891 C0.0464954402,1.19682891 0.11449544,0.56682891 0.54449544,0.22082891 C0.97549544,-0.12517109 1.60449544,-0.0571710898 1.95149544,0.37282891 L6.77949544,6.37282891 C7.07749544,6.74382891 7.07349544,7.27382891 6.76849544,7.63982891 L1.76849544,13.6398289 C1.57049544,13.8768289 1.28649544,13.9998289 0.99949544,13.9998289" id="path-z3d52xungu-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop/-Top-Navigation" transform="translate(-53.000000, -9.000000)">
+            <g id="Arrow-Right" transform="translate(40.000000, 0.000000)">
+                <g id="Stacked-Group" transform="translate(4.000000, 4.000000)">
+                    <g id="arrow-ios-right" transform="translate(9.000005, 5.000171)">
+                        <mask id="mask-z3d52xungu-2" fill="white">
+                            <use xlink:href="#path-z3d52xungu-1"></use>
+                        </mask>
+                        <use id="🎨-Icon-Сolor" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-z3d52xungu-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

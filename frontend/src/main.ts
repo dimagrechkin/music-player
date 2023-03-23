@@ -9,6 +9,7 @@ import piniaPersist from 'pinia-plugin-persist';
 import router from './router';
 import './style.css';
 import App from './App.vue';
+import SvgComponent from "@/components/SvgComponent.vue"; 
 
 window.Buffer = window.Buffer || Buffer;
 
@@ -33,4 +34,4 @@ const apolloClient = new ApolloClient({
   cache,
 });
 
-createApp(App).use(VueQueryPlugin).use(pinia).use(router).provide(DefaultApolloClient, apolloClient).mount('#app');
+createApp(App).component("icon", SvgComponent).use(VueQueryPlugin).use(pinia).use(router).provide(DefaultApolloClient, apolloClient).mount('#app');

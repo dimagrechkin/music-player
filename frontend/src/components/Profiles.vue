@@ -7,18 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-
 import CardProfile from './CardProfile.vue';
 import { PublicationSortCriteria, useExplorePublicationsQuery } from '@/graphql/generated';
-import { useCryptoStore } from '@/stores/crypto';
-
-const cryptoStore = useCryptoStore();
-const { account } = storeToRefs(cryptoStore);
 
 const { result } = useExplorePublicationsQuery({
   request: {
-    sortCriteria: PublicationSortCriteria.TopCollected,
+    sortCriteria: PublicationSortCriteria.Latest,
   },
 });
 </script>

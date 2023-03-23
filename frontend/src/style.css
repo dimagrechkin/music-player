@@ -1,3 +1,80 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root { 
+    --black: #00000056;
+    --black-2: #0000004c;
+    --razzle-dazzle-rose: #f330e6;
+    --scooter: #30bcf3;
+    --white: #ffffff99;
+    --white-2: #ffffffde;
+    --white-3: #ffffff1a;
+    --white-4: #ffffff;
+    --white-5: #ffffff4c;
+    --white-6: #ffffff33;
+   
+    --font-size-l: 17px;
+    --font-size-m: 15px;
+    --font-size-s: 13px;
+    --font-size-xl: 22px;
+    --font-size-xs: 11px;
+    --font-size-xxl: 34px;
+   
+    --font-family-nunito: "Nunito", Helvetica;
+  }
+  .nunito-normal-white-15px {
+    color: var(--white);
+    font-family: var(--font-family-nunito);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  .nunito-normal-white-11px {
+    color: var(--white);
+    font-family: var(--font-family-nunito);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  .nunito-normal-white-15px-2 {
+    color: var(--white-2);
+    font-family: var(--font-family-nunito);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  .nunito-bold-white-17px {
+    color: var(--white-2);
+    font-family: var(--font-family-nunito);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 700;
+  }
+  
+  .nunito-normal-white-15px-3 {
+    color: var(--white-4);
+    font-family: var(--font-family-nunito);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  .nunito-normal-white-13px {
+    color: var(--white);
+    font-family: var(--font-family-nunito);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  .nunito-medium-white-15px {
+    color: var(--white-4);
+    font-family: var(--font-family-nunito);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    font-weight: 500;
+  }

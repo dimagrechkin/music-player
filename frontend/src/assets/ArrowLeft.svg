@@ -1,0 +1,15 @@
+<svg width="7px" height="14px" viewBox="0 0 7 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="jam-vimeo1">
+    <defs>
+        <path d="M5.82865998,13.9994954 C5.53665998,13.9994954 5.24665998,13.8724954 5.04865998,13.6264954 L0.220659981,7.62649544 C-0.0773400189,7.25549544 -0.0733400189,6.72549544 0.231659981,6.35949544 L5.23165998,0.35949544 C5.58465998,-0.0645045598 6.21565998,-0.12150456 6.64065998,0.23149544 C7.06465998,0.58449544 7.12165998,1.21549544 6.76765998,1.63949544 L2.29265998,7.01049544 L6.60765998,12.3724954 C6.95365998,12.8024954 6.88565998,13.4324954 6.45465998,13.7784954 C6.27065998,13.9274954 6.04865998,13.9994954 5.82865998,13.9994954" id="path-p17u02_tlo-1"></path>
+    </defs>
+    <g id="2333" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop/-Top-Navigation" transform="translate(-12.000000, -9.000000)">
+            <g id="arrow-ios-left" transform="translate(11.999940, 9.000505)">
+                <mask id="mask-p17u02_tlo-23" fill="white">
+                    <use xlink:href="#path-p17u02_tlo-2"></use>
+                </mask>
+                <use id="1Icon-Сolor" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-p17u02_tlo-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

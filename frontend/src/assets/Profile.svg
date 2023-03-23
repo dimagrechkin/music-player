@@ -1,0 +1,25 @@
+<svg width="14px" height="18px" viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M7,8 C9.206,8 11,6.206 11,4 C11,1.794 9.206,0 7,0 C4.794,0 3,1.794 3,4 C3,6.206 4.794,8 7,8 M13,18 C13.553,18 14,17.552 14,17 C14,13.14 10.859,10 7,10 C3.141,10 0,13.14 0,17 C0,17.552 0.447,18 1,18 L13,18 Z" id="path-dv3np0whzo-1"></path>
+    </defs>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop2" transform="translate(-156.000000, -667.000000)">
+            <g id="Desktop" transform="translate(80.000000, 88.000000)">
+                <g id="Side-Menu" transform="translate(0.000000, -1.000000)">
+                    <g id="Library" transform="translate(16.000000, 384.000000)">
+                        <g id="List" transform="translate(51.000000, 68.000000)">
+                            <g id="Artist" transform="translate(0.000000, 121.000000)">
+                                <g id="person-fill" transform="translate(9.000000, 7.000000)">
+                                    <mask id="mask-dv3np0whzo-2" fill="white">
+                                        <use xlink:href="#path-dv3np0whzo-1"></use>
+                                    </mask>
+                                    <use id="🎨-Icon-Сolor" fill-opacity="0.87" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-dv3np0whzo-1"></use>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
