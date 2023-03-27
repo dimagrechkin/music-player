@@ -12,11 +12,14 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "SideMenuSelectedCategoryLayout",
-  props: ["overlapGroup", "base", "homeFill", "menu"],
-};
+<script lang="ts" setup>
+interface Props {
+  overlapGroup: string;
+  base: string;
+  homeFill: string;
+  menu: string;
+}
+defineProps<Props>();
 </script>
 
 <style>

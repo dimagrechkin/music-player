@@ -1,0 +1,25 @@
+<svg width="15px" height="7px" viewBox="0 0 15 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M6.99990909,6.99949544 C6.77190909,6.99949544 6.54490909,6.92249544 6.35990909,6.76749544 L0.359909093,1.76749544 C-0.0640909073,1.41449544 -0.122090907,0.78349544 0.231909093,0.35949544 C0.584909093,-0.0645045598 1.21490909,-0.12150456 1.63990909,0.23149544 L7.01090909,4.70749544 L12.3729091,0.39249544 C12.8029091,0.0464954402 13.4329091,0.11449544 13.7789091,0.54449544 C14.1249091,0.97449544 14.0569091,1.60349544 13.6269091,1.95049544 L7.62690909,6.77849544 C7.44390909,6.92549544 7.22190909,6.99949544 6.99990909,6.99949544" id="path-c9x_ig7me9-1"></path>
+    </defs>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop2" transform="translate(-1463.000000, -117.000000)">
+            <g id="Desktop" transform="translate(80.000000, 88.000000)">
+                <g id="Tab-Bar" transform="translate(244.000000, -1.000000)">
+                    <g id="Top-Left-Navigation" transform="translate(971.000000, 16.000000)">
+                        <g id="Avatar" transform="translate(40.000000, 0.000000)">
+                            <g id="Group-8" transform="translate(120.000000, 0.000000)">
+                                <g id="arrow-ios-down" transform="translate(8.664926, 14.000505)">
+                                    <mask id="mask-c9x_ig7me9-2" fill="white">
+                                        <use xlink:href="#path-c9x_ig7me9-1"></use>
+                                    </mask>
+                                    <use id="🎨-Icon-Сolor" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-c9x_ig7me9-1"></use>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
