@@ -10,7 +10,8 @@ const sideMenuSelectedCategoryLayoutData = {
 const sideMenuLayoutData = {
   search1:
     'https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-search-E0EA35DC-64C7-4784-951A-C5BD528C45D3@2x.png',
-  search2: 'Profiles',
+  profiles: 'Profiles',
+  createPost: 'Create Post',
 };
 
 const desktopTopNavigationData = {
@@ -23,7 +24,7 @@ const desktopTopNavigationData = {
 const searchfiledData = {
   search1:
     'https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-search-3A00FBAF-C471-4851-858A-C026748EAC1A@2x.png',
-  search2: 'Search',
+  search: 'Search',
 };
 
 const topLeftNavigationData = {

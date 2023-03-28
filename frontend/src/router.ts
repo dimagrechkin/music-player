@@ -1,6 +1,8 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw, RouteComponent } from 'vue-router';
 
 import { routes as profileModuleRoutes } from '@/components/router';
+
+const HomePageIndexView = (): Promise<RouteComponent> => import('@/components/HomePage.vue');
 
 export const routes: Array<RouteRecordRaw> = [
   ...profileModuleRoutes,
@@ -9,8 +11,8 @@ export const routes: Array<RouteRecordRaw> = [
   // after user logged in
   {
     path: '/',
-    redirect: '',
     name: 'base-path',
+    component: HomePageIndexView,
   },
 ];
 

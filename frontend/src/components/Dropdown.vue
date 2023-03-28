@@ -8,7 +8,7 @@
     <div class="profile-name nunito-normal-white-15px-3">{{ profileName }}</div>
     <icon class="arrow-ios-down" name="arrowDown"></icon>
     <div class="dropdown-content">
-      <p>item1</p>
+      <p>Log Out</p>
     </div>
   </div>
 </template>

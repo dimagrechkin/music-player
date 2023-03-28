@@ -4,9 +4,9 @@ import appConfig from '@/utils/config';
 
 import NestedRouterLayout from '@/layouts/NestedRouterLayout.vue';
 
-const ProfileIndexView = (): Promise<RouteComponent> => import('./Profiles.vue');
+const HomePageIndexView = (): Promise<RouteComponent> => import('./HomePage.vue');
 const ProfilePageView = (): Promise<RouteComponent> => import('./ProfilePage.vue');
-const CreatePageView = (): Promise<RouteComponent> => import('./CreatePage.vue');
+const CreatePageView = (): Promise<RouteComponent> => import('@/components/CreatePage.vue');
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -17,7 +17,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: appConfig.routes.profiles.moduleIndex,
-        component: ProfileIndexView,
+        component: HomePageIndexView,
       },
       {
         path: ':profileId/profile',
@@ -46,5 +46,13 @@ export const routes: RouteRecordRaw[] = [
         },
       },
     ],
+  },
+  {
+    path: '/create',
+    name: appConfig.routes.create,
+    component: CreatePageView,
+    meta: {
+      title: 'Create',
+    },
   },
 ];

@@ -1,16 +1,22 @@
 <template>
-  <div :class="[`side-menu-layout-12`, className || ``]">
-    <icon name="Profile"></icon>
+  <div :class="[`side-menu-layout-12`, className || ``]" @click="emit('navigation-click')">
+    <icon :name="icon"></icon>
     <div class="search-1 nunito-normal-white-15px">{{ listItem }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
 interface Props {
-  className: string;
+  icon: string;
   listItem: string;
 }
 defineProps<Props>();
+
+interface Emits {
+  (e: 'navigation-click'): void;
+}
+
+const emit = defineEmits<Emits>();
 </script>
 
 <style>

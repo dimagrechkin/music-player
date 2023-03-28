@@ -6,7 +6,7 @@
       <div class="input-container"><textarea v-model="description" placeholder="Description"></textarea></div>
       <div class="input-container"><textarea v-model="content" placeholder="Content"></textarea></div>
       <div class="input-container white center" @click="onPost">apply</div>
-      <div class="white" v-if="validationError">please feel every field</div>
+      <div class="white" v-if="validationError">please fill every field</div>
     </div>
   </div>
 </template>
@@ -98,66 +98,64 @@ const { result } = useDefaultProfileQuery(
   }
 );
 
-const onPost = async() => {
+const onPost = async () => {
   validationError.value = false;
-  if(description.value && text.value && content.value){
-  await loginAccount();
-  const ipfsResult = await uploadIpfs<Metadata>({
-    version: '2.0.0',
-    mainContentFocus: PublicationMainFocus.TEXT_ONLY,
-    metadata_id: uuidv4(),
-    description: description.value,
-    locale: 'en-US',
-    content: content.value,
-    external_url: null,
-    image: null,
-    imageMimeType: null,
-    name: text.value,
-    attributes: [],
-    tags: [],
-  });
+  if (description.value && text.value && content.value) {
+    await loginAccount();
+    const ipfsResult = await uploadIpfs<Metadata>({
+      version: '2.0.0',
+      mainContentFocus: PublicationMainFocus.TEXT_ONLY,
+      metadata_id: uuidv4(),
+      description: description.value,
+      locale: 'en-US',
+      content: content.value,
+      external_url: null,
+      image: null,
+      imageMimeType: null,
+      name: text.value,
+      attributes: [],
+      tags: [],
+    });
 
-  const typedData = await requestTypedData({
-    request: {
-      collectModule: {
-        freeCollectModule: {
-          followerOnly: false,
+    const typedData = await requestTypedData({
+      request: {
+        collectModule: {
+          freeCollectModule: {
+            followerOnly: false,
+          },
+        },
+        contentURI: `ipfs://${ipfsResult.path}`,
+        profileId: result.value?.defaultProfile?.id,
+        referenceModule: {
+          followerOnlyReferenceModule: false,
         },
       },
-      contentURI: `ipfs://${ipfsResult.path}`,
-      profileId: result.value?.defaultProfile?.id,
-      referenceModule: {
-        followerOnlyReferenceModule: false,
+    });
+
+    const { domain, types, value } = typedData?.data?.createPostTypedData.typedData;
+
+    const signature = await signedTypeData(domain, types, value);
+
+    const { v, r, s } = splitSignature(signature);
+
+    const tx = await lensHub.postWithSig({
+      profileId: value.profileId,
+      contentURI: value.contentURI,
+      collectModule: value.collectModule,
+      collectModuleInitData: value.collectModuleInitData,
+      referenceModule: value.referenceModule,
+      referenceModuleInitData: value.referenceModuleInitData,
+      sig: {
+        v,
+        r,
+        s,
+        deadline: value.deadline,
       },
-    },
-  });
-
-  const { domain, types, value } = typedData?.data?.createPostTypedData.typedData;
-
-  const signature = await signedTypeData(domain, types, value);
-
-  const { v, r, s } = splitSignature(signature);
-
-  const tx = await lensHub.postWithSig({
-    profileId: value.profileId,
-    contentURI: value.contentURI,
-    collectModule: value.collectModule,
-    collectModuleInitData: value.collectModuleInitData,
-    referenceModule: value.referenceModule,
-    referenceModuleInitData: value.referenceModuleInitData,
-    sig: {
-      v,
-      r,
-      s,
-      deadline: value.deadline,
-    },
-  });
-  }else{
+    });
+  } else {
     validationError.value = true;
   }
- 
-}
-
+};
 </script>
 
 <style>
@@ -185,7 +183,7 @@ const onPost = async() => {
   border: 1px solid white;
 }
 
-.center{
+.center {
   width: 100%;
   display: flex;
   flex-direction: column;

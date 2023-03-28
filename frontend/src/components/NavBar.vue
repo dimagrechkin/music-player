@@ -14,16 +14,31 @@
           :homeFill="mockedData.sideMenuSelectedCategoryLayoutProps.homeFill"
           :menu="mockedData.sideMenuSelectedCategoryLayoutProps.menu"
         />
-        <side-menu-layout :listItem="mockedData.sideMenuLayoutProps.search2" />
+        <side-menu-item icon="Profile" :listItem="mockedData.sideMenuLayoutProps.profiles" />
+        <side-menu-item
+          icon="Plus"
+          :listItem="mockedData.sideMenuLayoutProps.createPost"
+          @navigation-click="moveToCreatePage"
+        />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+
 import SideMenuSelectedCategoryLayout from '@/components/SideMenuSelectedCategoryLayout.vue';
-import SideMenuLayout from '@/components/SideMenuLayout.vue';
+import SideMenuItem from '@/components/SideMenuItem.vue';
+import appConfig from '@/utils/config';
 
 import { mockedData } from '@/mocks';
+
+const router = useRouter();
+
+const moveToCreatePage = () =>
+  router.push({
+    name: appConfig.routes.create,
+  });
 </script>
 
 <style scoped>

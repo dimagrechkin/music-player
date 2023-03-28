@@ -2,6 +2,7 @@ const config = {
   routes: {
     nav: {
       profiles: 'profiles',
+      create: 'create',
     },
     profiles: {
       module: 'profile',
@@ -12,6 +13,7 @@ const config = {
       update: 'profile_update',
       details: 'profile_details',
     },
+    create: 'create_post',
   },
 };
 
