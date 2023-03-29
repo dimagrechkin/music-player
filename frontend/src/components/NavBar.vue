@@ -14,7 +14,11 @@
           :homeFill="mockedData.sideMenuSelectedCategoryLayoutProps.homeFill"
           :menu="mockedData.sideMenuSelectedCategoryLayoutProps.menu"
         />
-        <side-menu-item icon="Profile" :listItem="mockedData.sideMenuLayoutProps.profiles" />
+        <side-menu-item
+          icon="Profile"
+          :listItem="mockedData.sideMenuLayoutProps.profiles"
+          @navigation-click="moveToHomePage"
+        />
         <side-menu-item
           icon="Plus"
           :listItem="mockedData.sideMenuLayoutProps.createPost"
@@ -38,6 +42,11 @@ const router = useRouter();
 const moveToCreatePage = () =>
   router.push({
     name: appConfig.routes.create,
+  });
+
+const moveToHomePage = () =>
+  router.push({
+    name: 'base-path',
   });
 </script>
 

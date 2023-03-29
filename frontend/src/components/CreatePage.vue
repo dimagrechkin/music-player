@@ -115,6 +115,7 @@ const onPost = async () => {
       name: text.value,
       attributes: [],
       tags: [],
+      appId: 'lens_protocol_dima',
     });
 
     const typedData = await requestTypedData({

@@ -78,7 +78,7 @@ export const mockedData = {
   favoriteArtists: 'Favorite Profiles',
   line1:
     'https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-line-BEFCA296-DEA4-4F9F-BAC4-137E18CEC833.png',
-  recommendedForYou: 'Recommended for you',
+  recommendedForYou: 'Latest Posts',
   line2:
     'https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-line-BEFCA296-DEA4-4F9F-BAC4-137E18CEC833.png',
   rectangle1:

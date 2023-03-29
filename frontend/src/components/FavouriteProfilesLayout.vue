@@ -1,17 +1,32 @@
 <template>
-  <div :class="[`desktop-small-layout-1`, className || ``]">
+  <div :class="[`desktop-small-layout-1`, className || ``]" v-for="profile in profiles">
     <div class="doja-cat-container-1">
-      <div class="image-artists-doja-cat-1" :style="{ 'background-image': 'url(' + imageArtistsDojaCat + ')' }"></div>
-      <div class="doja-cat-1 nunito-normal-white-13px">{{ dojaCat }}</div>
+      <div class="image-artists-doja-cat-1" :style="{ 'background-image': 'url(' + defaultProfileImage + ')' }"></div>
+      <div class="nunito-normal-white-13px">{{ profile.profile.handle }}</div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "DesktopSmallLayout",
-  props: ["imageArtistsDojaCat", "dojaCat", "className"],
-};
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { PublicationSortCriteria, useExplorePublicationsQuery } from '@/graphql/generated';
+
+interface Props {
+  imageArtistsDojaCat: string;
+  dojaCat: string;
+  className: string;
+}
+defineProps<Props>();
+
+const { result } = useExplorePublicationsQuery({
+  request: {
+    sortCriteria: PublicationSortCriteria.Latest,
+    sources: 'lens_protocol_dima',
+  },
+});
+const profiles = computed(() => result.value?.explorePublications.items);
+const defaultProfileImage =
+  'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg';
 </script>
 
 <style>
@@ -38,6 +53,7 @@ export default {
 
 .image-artists-doja-cat-1 {
   background-size: 100% 100%;
+  border-radius: 50%;
   height: 100px;
   margin-top: 6px;
   width: 100px;

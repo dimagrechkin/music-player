@@ -1,0 +1,6 @@
+query PublicationMetadataStatus($request: GetPublicationMetadataStatusRequest!) {
+  publicationMetadataStatus(request: $request) {
+    status
+    reason
+  }
+}

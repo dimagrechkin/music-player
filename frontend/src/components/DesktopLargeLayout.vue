@@ -1,22 +1,35 @@
 <template>
-  <div class="desktop-large-layout">
+  <div class="desktop-large-layout" v-for="publication in publications">
     <div class="overlap-group-1">
       <div class="overlap-group-2">
-        <img class="rectangle-3" :src="rectangle" alt="Rectangle" />
-        <div class="play">
-          <div class="arrow-right-fill"></div>
-        </div>
+        <img class="rectangle-3" :src="defaultProfileImage" alt="Rectangle" />
       </div>
-      <div class="my-favorite-songs nunito-normal-white-15px-2">{{ myFavoriteSongs }}</div>
+      <div class="my-favorite-songs nunito-normal-white-15px-2">{{ publication.metadata.content }}</div>
+      <div class="my-favorite-songs2 nunito-normal-white-15px-2">{{ publication.metadata.description }}</div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "DesktopLargeLayout",
-  props: ["rectangle", "myFavoriteSongs"],
-};
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { PublicationSortCriteria, useExplorePublicationsQuery } from '@/graphql/generated';
+
+interface Props {
+  rectangle: string;
+  myFavoriteSongs: string;
+}
+defineProps<Props>();
+
+const { result } = useExplorePublicationsQuery({
+  request: {
+    sortCriteria: PublicationSortCriteria.Latest,
+    sources: 'lens_protocol_dima',
+  },
+});
+
+const publications = computed(() => result.value?.explorePublications.items);
+const defaultProfileImage =
+  'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg';
 </script>
 
 <style>
@@ -82,6 +95,15 @@ export default {
 
 .my-favorite-songs {
   left: 12px;
+  letter-spacing: 0;
+  line-height: 18px;
+  position: absolute;
+  top: 144px;
+  white-space: nowrap;
+}
+
+.my-favorite-songs2 {
+  right: 22px;
   letter-spacing: 0;
   line-height: 18px;
   position: absolute;

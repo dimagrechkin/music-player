@@ -3192,6 +3192,13 @@ export type CreatePostTypedDataMutationVariables = Exact<{
 
 export type CreatePostTypedDataMutation = { __typename?: 'Mutation', createPostTypedData: { __typename?: 'CreatePostBroadcastItemResult', id: any, expiresAt: any, typedData: { __typename?: 'CreatePostEIP712TypedData', types: { __typename?: 'CreatePostEIP712TypedDataTypes', PostWithSig: Array<{ __typename?: 'EIP712TypedDataField', name: string, type: string }> }, domain: { __typename?: 'EIP712TypedDataDomain', name: string, chainId: any, version: string, verifyingContract: any }, value: { __typename?: 'CreatePostEIP712TypedDataValue', nonce: any, deadline: any, profileId: any, contentURI: any, collectModule: any, collectModuleInitData: any, referenceModule: any, referenceModuleInitData: any } } } };
 
+export type PublicationMetadataStatusQueryVariables = Exact<{
+  request: GetPublicationMetadataStatusRequest;
+}>;
+
+
+export type PublicationMetadataStatusQuery = { __typename?: 'Query', publicationMetadataStatus: { __typename?: 'PublicationMetadataStatus', status: PublicationMetadataStatusType, reason?: string | null } };
+
 export type RefreshMutationVariables = Exact<{
   request: RefreshRequest;
 }>;
@@ -4157,6 +4164,37 @@ export function useCreatePostTypedDataMutation(options: VueApolloComposable.UseM
   return VueApolloComposable.useMutation<CreatePostTypedDataMutation, CreatePostTypedDataMutationVariables>(CreatePostTypedDataDocument, options);
 }
 export type CreatePostTypedDataMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<CreatePostTypedDataMutation, CreatePostTypedDataMutationVariables>;
+export const PublicationMetadataStatusDocument = gql`
+    query PublicationMetadataStatus($request: GetPublicationMetadataStatusRequest!) {
+  publicationMetadataStatus(request: $request) {
+    status
+    reason
+  }
+}
+    `;
+
+/**
+ * __usePublicationMetadataStatusQuery__
+ *
+ * To run a query within a Vue component, call `usePublicationMetadataStatusQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicationMetadataStatusQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = usePublicationMetadataStatusQuery({
+ *   request: // value for 'request'
+ * });
+ */
+export function usePublicationMetadataStatusQuery(variables: PublicationMetadataStatusQueryVariables | VueCompositionApi.Ref<PublicationMetadataStatusQueryVariables> | ReactiveFunction<PublicationMetadataStatusQueryVariables>, options: VueApolloComposable.UseQueryOptions<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables>(PublicationMetadataStatusDocument, variables, options);
+}
+export function usePublicationMetadataStatusLazyQuery(variables: PublicationMetadataStatusQueryVariables | VueCompositionApi.Ref<PublicationMetadataStatusQueryVariables> | ReactiveFunction<PublicationMetadataStatusQueryVariables>, options: VueApolloComposable.UseQueryOptions<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables>(PublicationMetadataStatusDocument, variables, options);
+}
+export type PublicationMetadataStatusQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<PublicationMetadataStatusQuery, PublicationMetadataStatusQueryVariables>;
 export const RefreshDocument = gql`
     mutation Refresh($request: RefreshRequest!) {
   refresh(request: $request) {
