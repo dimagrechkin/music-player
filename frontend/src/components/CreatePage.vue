@@ -1,12 +1,20 @@
 <template>
   <div class="container">
     <div class="form-container">
-      <div class="input-container"><input ref="file" @change="handleFileUpload()" type="file" /></div>
-      <div class="input-container"><input v-model="text" type="text" placeholder="Title" /></div>
-      <div class="input-container"><textarea v-model="description" placeholder="Description"></textarea></div>
-      <div class="input-container"><textarea v-model="content" placeholder="Content"></textarea></div>
+      <div class="input-container">
+        <input ref="file" type="file" @change="handleFileUpload()" />
+      </div>
+      <div class="input-container">
+        <input v-model="text" type="text" placeholder="Title" />
+      </div>
+      <div class="input-container">
+        <textarea v-model="description" placeholder="Description" />
+      </div>
+      <div class="input-container">
+        <textarea v-model="content" placeholder="Content" />
+      </div>
       <div class="input-container white center" @click="onPost">apply</div>
-      <div class="white" v-if="validationError">please fill every field</div>
+      <div v-if="validationError" class="white">please fill every field</div>
     </div>
   </div>
 </template>
@@ -32,7 +40,7 @@ import { splitSignature } from '@ethersproject/bytes';
 import { uploadIpfs } from '../ipfs';
 import { lensHub } from '@/utils/lens-hub';
 
-const file = ref(null);
+const file = ref<{ files: string }>();
 const text = ref('');
 const description = ref('');
 const content = ref('');
@@ -67,11 +75,11 @@ const signText = (text: string) => {
 
 const { mutate: sendSignedMessage } = useAuthenticateMutation();
 
-const { setAccountAddress, setAccessToken } = useCryptoStore();
+const { setAccessToken } = useCryptoStore();
 
 const loginAccount = async () => {
-  await signText(challengeResult?.value?.challenge.text);
-  signTextSignature.value = await signText(challengeResult?.value?.challenge.text);
+  await signText(challengeResult?.value?.challenge.text ?? '');
+  signTextSignature.value = await signText(challengeResult?.value?.challenge.text ?? '');
 
   const { data } = await sendSignedMessage({
     request: {
@@ -133,26 +141,27 @@ const onPost = async () => {
       },
     });
 
-    const { domain, types, value } = typedData?.data?.createPostTypedData.typedData;
+    if (typedData?.data?.createPostTypedData.typedData) {
+      const { domain, types, value } = typedData.data.createPostTypedData.typedData;
+      const signature = await signedTypeData(domain, types, value);
 
-    const signature = await signedTypeData(domain, types, value);
+      const { v, r, s } = splitSignature(signature);
 
-    const { v, r, s } = splitSignature(signature);
-
-    const tx = await lensHub.postWithSig({
-      profileId: value.profileId,
-      contentURI: value.contentURI,
-      collectModule: value.collectModule,
-      collectModuleInitData: value.collectModuleInitData,
-      referenceModule: value.referenceModule,
-      referenceModuleInitData: value.referenceModuleInitData,
-      sig: {
-        v,
-        r,
-        s,
-        deadline: value.deadline,
-      },
-    });
+      await lensHub.postWithSig({
+        profileId: value.profileId,
+        contentURI: value.contentURI,
+        collectModule: value.collectModule,
+        collectModuleInitData: value.collectModuleInitData,
+        referenceModule: value.referenceModule,
+        referenceModuleInitData: value.referenceModuleInitData,
+        sig: {
+          v,
+          r,
+          s,
+          deadline: value.deadline,
+        },
+      });
+    }
   } else {
     validationError.value = true;
   }

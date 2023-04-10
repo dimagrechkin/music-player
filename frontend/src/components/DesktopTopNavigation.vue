@@ -1,16 +1,15 @@
 <template>
   <div class="desktop-top-navigation">
-    <div class="arrow-ios" >
-      <icon name="arrowLeft"/>
+    <div class="arrow-ios">
+      <icon name="arrowLeft" />
     </div>
     <div class="arrow-ios">
-      <icon name="arrowRight"/>
+      <icon name="arrowRight" />
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 
 <style>
 .desktop-top-navigation {

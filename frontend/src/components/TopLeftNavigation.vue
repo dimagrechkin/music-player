@@ -1,9 +1,9 @@
 <template>
   <div class="top-left-navigation">
-    <icon name="notification"></icon>
+    <icon name="notification" />
 
     <div class="account">
-      <dropdown :profile-name="profileName" />
+      <app-dropdown :profile-name="profileName" />
       <!-- <img
         class="oval-3"
         src="https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-oval-A237993F-5DE2-44FD-9B67-DCDC50E9E005@2x.png"
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import Dropdown from './Dropdown.vue';
+import AppDropdown from './AppDropdown.vue';
 
 interface Props {
   bellFill: string;

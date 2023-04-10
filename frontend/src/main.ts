@@ -9,7 +9,7 @@ import piniaPersist from 'pinia-plugin-persist';
 import router from './router';
 import './style.css';
 import App from './App.vue';
-import SvgComponent from "@/components/SvgComponent.vue"; 
+import SvgComponent from '@/components/SvgComponent.vue';
 
 window.Buffer = window.Buffer || Buffer;
 
@@ -20,7 +20,9 @@ pinia.use(piniaPersist);
 const httpLink = createHttpLink({
   uri: 'https://api-mumbai.lens.dev',
   headers: {
-    ...(JSON.parse(sessionStorage.getItem('user'))?.accessToken && { 'x-access-token': JSON.parse(JSON.parse(sessionStorage.getItem('user')).accessToken).accessToken}),
+    ...(JSON.parse(sessionStorage.getItem('user') as string)?.accessToken && {
+      'x-access-token': JSON.parse(JSON.parse(sessionStorage.getItem('user') ?? '').accessToken).accessToken,
+    }),
     'Access-Control-Allow-Origin': '*',
   },
 });
@@ -34,4 +36,10 @@ const apolloClient = new ApolloClient({
   cache,
 });
 
-createApp(App).component("icon", SvgComponent).use(VueQueryPlugin).use(pinia).use(router).provide(DefaultApolloClient, apolloClient).mount('#app');
+createApp(App)
+  .component('icon', SvgComponent)
+  .use(VueQueryPlugin)
+  .use(pinia)
+  .use(router)
+  .provide(DefaultApolloClient, apolloClient)
+  .mount('#app');

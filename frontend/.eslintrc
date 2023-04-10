@@ -7,7 +7,7 @@
     "vue/setup-compiler-macros": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "plugin:vue/vue3-recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "extends": ["eslint:recommended", "plugin:vue/vue3-recommended", "plugin:@typescript-eslint/recommended"],
   "parser": "vue-eslint-parser", // parse <template> tags
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
@@ -18,5 +18,6 @@
     "@typescript-eslint/no-explicit-any": "warn",
     "vue/no-unused-properties": "warn",
     "vue/component-api-style": "error" // Add if we want to enforce no use of Options API
-  }
+  },
+  "ignorePatterns": [".gitignore"]
 }

@@ -1,5 +1,7 @@
 <template>
-  <div class="discover">{{ mockedData.discover }}</div>
+  <div class="discover">
+    {{ mockedData.discover }}
+  </div>
   <div class="flex-col-1 nunito-bold-white-17px">
     <login-card
       :title="mockedData.desktopTopCardProps.title"
@@ -7,27 +9,32 @@
       :first-button-text="mockedData.desktopTopCardProps.firstButtonText"
       :second-button-text="mockedData.desktopTopCardProps.secondButtonText"
     />
-    <div class="favorite-artists">
-      <div class="favorite-artists-1">{{ mockedData.favoriteArtists }}</div>
+    <div v-if="isLoggedIn" class="favorite-artists">
+      <div class="favorite-artists-1">
+        {{ mockedData.favoriteArtists }}
+      </div>
       <img class="line" :src="mockedData.line1" alt="Line" />
       <div class="desktopsmalllayout-container">
         <favourite-profiles-layout
-          :imageArtistsDojaCat="mockedData.desktopSmallLayout1Props.imageArtistsDojaCat"
-          :dojaCat="mockedData.desktopSmallLayout1Props.dojaCat"
+          :image-artists-doja-cat="mockedData.desktopSmallLayout1Props.imageArtistsDojaCat"
+          :doja-cat="mockedData.desktopSmallLayout1Props.dojaCat"
         />
       </div>
     </div>
-    <div class="recommended-for-you">
-      <div class="recommended-for-you-1">{{ mockedData.recommendedForYou }}</div>
+    <div v-if="isLoggedIn" class="recommended-for-you">
+      <div class="recommended-for-you-1">
+        {{ mockedData.recommendedForYou }}
+      </div>
       <img class="line" :src="mockedData.line2" alt="Line" />
       <div class="desktoplargelayout-container">
         <desktop-large-layout
           :rectangle="mockedData.recomendedForYouProps.rectangle"
-          :myFavoriteSongs="mockedData.recomendedForYouProps.myFavoriteSongs"
+          :my-favorite-songs="mockedData.recomendedForYouProps.myFavoriteSongs"
         />
       </div>
     </div>
-    <div class="overlap-group-container">
+
+    <!-- <div class="overlap-group-container">
       <div class="overlap-group10">
         <div class="overlap-group9">
           <img class="rectangle" :src="mockedData.rectangle1" alt="Rectangle" />
@@ -51,15 +58,21 @@
         </div>
         <div class="recently-play">{{ mockedData.recentlyPlay }}</div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup lang="ts">
+import { computed } from 'vue';
 import LoginCard from '@/components/LoginCard.vue';
 import FavouriteProfilesLayout from '@/components/FavouriteProfilesLayout.vue';
 import DesktopLargeLayout from '@/components/DesktopLargeLayout.vue';
 import DesktopListLayout from '@/components/DesktopListLayout.vue';
 import { mockedData } from '@/mocks';
+import { useCryptoStore } from '@/stores/crypto';
+
+const store = useCryptoStore();
+
+const isLoggedIn = computed(() => !!store.account);
 </script>
 
 <style scoped>

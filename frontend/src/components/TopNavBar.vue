@@ -1,11 +1,11 @@
 <template>
   <div class="top-navigation">
     <desktop-top-navigation />
-    <searchfiled :search1="mockedData.searchfiledProps.search1" :search2="mockedData.searchfiledProps.search" />
+    <search-fieled :search1="mockedData.searchfiledProps.search1" :search2="mockedData.searchfiledProps.search" />
     <top-left-navigation
-      :bellFill="mockedData.topLeftNavigationProps.bellFill"
-      :profile-name="profileQuery.result.value?.defaultProfile.handle"
-      :arrowIosDown="mockedData.topLeftNavigationProps.arrowIosDown"
+      :bell-fill="mockedData.topLeftNavigationProps.bellFill"
+      :profile-name="profileQuery?.result?.value?.defaultProfile?.handle"
+      :arrow-ios-down="mockedData.topLeftNavigationProps.arrowIosDown"
     />
   </div>
 </template>
@@ -13,7 +13,7 @@
 import { storeToRefs } from 'pinia';
 
 import DesktopTopNavigation from '@/components/DesktopTopNavigation.vue';
-import Searchfiled from '@/components/Searchfiled.vue';
+import SearchFieled from '@/components/SearchField.vue';
 import TopLeftNavigation from '@/components/TopLeftNavigation.vue';
 import { useDefaultProfileQuery } from '@/graphql/generated';
 

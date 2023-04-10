@@ -1,8 +1,8 @@
 <template>
   <div class="clearable-input">
-  <span data-clear-input><icon name="Search"></icon></span>
-  <input type="search" placeholder="Search" />
-</div>
+    <span data-clear-input><icon name="Search" /></span>
+    <input type="search" placeholder="Search" />
+  </div>
 </template>
 
 <style>
@@ -15,6 +15,7 @@
   padding-left: 2em;
   padding-right: 1em;
   width: 100%;
+  color: var(--white-4);
   background-color: var(--white-3);
   border-radius: 10px;
   display: flex;
@@ -30,5 +31,4 @@
   padding: 0.4em 0.4em;
   cursor: pointer;
 }
-
 </style>

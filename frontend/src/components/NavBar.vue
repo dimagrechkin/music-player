@@ -1,7 +1,7 @@
 <template>
   <div class="side-menu">
     <div class="overlap-group">
-      <div class="rectangle"></div>
+      <div class="rectangle" />
       <img
         class="path"
         src="https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-path-98BF93D2-948C-4452-A943-7D8AE8F149B7.png"
@@ -9,19 +9,19 @@
       />
       <div class="library">
         <side-menu-selected-category-layout
-          :overlapGroup="mockedData.sideMenuSelectedCategoryLayoutProps.overlapGroup"
+          :overlap-group="mockedData.sideMenuSelectedCategoryLayoutProps.overlapGroup"
           :base="mockedData.sideMenuSelectedCategoryLayoutProps.base"
-          :homeFill="mockedData.sideMenuSelectedCategoryLayoutProps.homeFill"
+          :home-fill="mockedData.sideMenuSelectedCategoryLayoutProps.homeFill"
           :menu="mockedData.sideMenuSelectedCategoryLayoutProps.menu"
         />
         <side-menu-item
           icon="Profile"
-          :listItem="mockedData.sideMenuLayoutProps.profiles"
+          :list-item="mockedData.sideMenuLayoutProps.profiles"
           @navigation-click="moveToHomePage"
         />
         <side-menu-item
           icon="Plus"
-          :listItem="mockedData.sideMenuLayoutProps.createPost"
+          :list-item="mockedData.sideMenuLayoutProps.createPost"
           @navigation-click="moveToCreatePage"
         />
       </div>

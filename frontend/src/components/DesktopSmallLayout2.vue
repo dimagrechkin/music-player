@@ -2,17 +2,21 @@
   <div class="desktop-small-layout-5">
     <div class="overlap-group4">
       <img class="rectangle-2" :src="rectangle" alt="Rectangle" />
-      <div class="image-artists-doja-cat" :style="{ 'background-image': 'url(' + imageArtistsDojaCat + ')' }"></div>
-      <div class="doja-cat nunito-normal-white-13px">{{ dojaCat }}</div>
+      <div class="image-artists-doja-cat" :style="{ 'background-image': `url(${imageArtistsDojaCat})` }" />
+      <div class="doja-cat nunito-normal-white-13px">
+        {{ dojaCat }}
+      </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "DesktopSmallLayout2",
-  props: ["rectangle", "imageArtistsDojaCat", "dojaCat"],
-};
+<script lang="ts" setup>
+interface Props {
+  rectangle: string;
+  imageArtistsDojaCat: string;
+  dojaCat: string;
+}
+defineProps<Props>();
 </script>
 
 <style>

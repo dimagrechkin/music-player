@@ -1,7 +1,11 @@
 <template>
   <div class="right-menu">
-    <div class="friend-activity">{{ mockedData.friendActivity }}</div>
-    <div class="address">{{ mockedData.address }}</div>
+    <div class="friend-activity">
+      {{ mockedData.friendActivity }}
+    </div>
+    <div class="address">
+      {{ mockedData.address }}
+    </div>
     <friends-layout :activity="mockedData.friendLayoutProps.activity" />
   </div>
 </template>
