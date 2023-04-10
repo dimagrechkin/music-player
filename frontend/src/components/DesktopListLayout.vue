@@ -3,20 +3,24 @@
     <div class="flex-row">
       <img class="rectangle-4" :src="rectangle" alt="Rectangle" />
       <div class="group-12">
-        <div class="about-damn-time nunito-normal-white-15px-3">{{ aboutDamnTime }}</div>
-        <div class="lizzo nunito-normal-white-11px">{{ lizzo }}</div>
+        <div class="about-damn-time nunito-normal-white-15px-3">
+          {{ aboutDamnTime }}
+        </div>
+        <div class="lizzo nunito-normal-white-11px">
+          {{ lizzo }}
+        </div>
       </div>
       <div class="text-1 nunito-normal-white-11px">4:35</div>
-      <div class="more-horizontal"></div>
+      <div class="more-horizontal" />
     </div>
-    <div class="rectangle-5"></div>
+    <div class="rectangle-5" />
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "DesktopListLayout",
-  props: ["rectangle", "aboutDamnTime", "lizzo", "className"],
+  name: 'DesktopListLayout',
+  props: ['rectangle', 'aboutDamnTime', 'lizzo', 'className'],
 };
 </script>
 

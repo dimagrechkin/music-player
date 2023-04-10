@@ -1,5 +1,5 @@
 <template>
-  <div class="white-text" v-if="isLoadingProfile">Loading Profile ...</div>
+  <div v-if="isLoadingProfile" class="white-text">Loading Profile ...</div>
   <div class="profile-container">
     <div class="profile-content-container">
       <img
@@ -16,22 +16,28 @@
         class="profile-picture-container"
       />
 
-      <h1 class="white-text profile-name">{{ profilesData?.profile?.name || 'Unknown User' }}</h1>
-      <p class="white-text profile-handle">{{ profilesData?.profile?.handle || 'unknownuser' }}</p>
-      <p class="white-text profile-description">{{ profilesData?.profile?.bio || 'unknownuser' }}</p>
+      <h1 class="white-text profile-name">
+        {{ profilesData?.profile?.name || 'Unknown User' }}
+      </h1>
+      <p class="white-text profile-handle">
+        {{ profilesData?.profile?.handle || 'unknownuser' }}
+      </p>
+      <p class="white-text profile-description">
+        {{ profilesData?.profile?.bio || 'unknownuser' }}
+      </p>
       <p class="white-text follower-count">{{ profilesData?.profile?.stats.totalFollowers }}{{ ' Followers' }}</p>
     </div>
   </div>
   <button class="white-text">213</button>
   <div class="publications-container">
-    <div class="white-text" v-if="isLoadingPublications">Loading publications ...</div>
+    <div v-if="isLoadingPublications" class="white-text">Loading publications ...</div>
     <card-profile
       v-for="publication in publicationsData?.publications.items"
-      :publication="publication"
       :key="publication.id"
+      :publication="publication"
     />
   </div>
-  <div class="white-text" v-if="profileError || publicationsError">Couldn't find this profile</div>
+  <div v-if="profileError || publicationsError" class="white-text">Couldn't find this profile</div>
 </template>
 
 <script setup lang="ts">
@@ -67,7 +73,7 @@ const { account } = storeToRefs(cryptoStore);
 
 let signTextSignature = ref<string>();
 
-const { result: challengeREsult } = useChallengeQuery(
+const { result: challengeResult } = useChallengeQuery(
   () => ({
     request: {
       address: account.value,
@@ -77,7 +83,6 @@ const { result: challengeREsult } = useChallengeQuery(
     enabled: !!account.value,
   }
 );
-
 
 const getSigner = () => {
   return new ethers.Wallet(String(import.meta.env.VITE_PK) as string);
@@ -89,11 +94,11 @@ const signText = (text: string) => {
 
 const { mutate: sendSignedMessage } = useAuthenticateMutation();
 
-const { setAccountAddress, setAccessToken } = useCryptoStore();
+const { setAccessToken } = useCryptoStore();
 
 const loginAccount = async () => {
-  await signText(challengeREsult?.value?.challenge.text);
-  signTextSignature.value = await signText(challengeREsult?.value?.challenge.text);
+  await signText(challengeResult?.value?.challenge.text ?? '');
+  signTextSignature.value = await signText(challengeResult?.value?.challenge.text ?? '');
 
   const { data } = await sendSignedMessage({
     request: {
@@ -123,7 +128,7 @@ onResult(async () => {
       ],
     },
   });
-  const { domain, types, value } = await typedData?.value?.data?.createFollowTypedData?.typedData;
+  const { domain, types, value } = typedData?.value?.data?.createFollowTypedData?.typedData ?? undefined;
 
   signature.value = await signedTypeData(domain, types, value);
   const { v, r, s } = splitSignature(signature.value);

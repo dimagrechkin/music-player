@@ -1,7 +1,7 @@
 <template>
   <div class="feed-container">
     <div v-for="publication in result?.explorePublications.items" :key="publication.id">
-      <card-profile :publication="publication" :key="publication.id"></card-profile>
+      <card-profile :key="publication.id" :publication="publication" />
     </div>
   </div>
 </template>

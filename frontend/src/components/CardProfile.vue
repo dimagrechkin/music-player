@@ -4,7 +4,7 @@
       <img
         v-if="publication.metadata.media.length > 0"
         class="cardProfileProfileImage"
-        :src="imgConverter(publication?.profile?.picture?.original?.url || '')|| defaultProfileImage"
+        :src="imgConverter(publication?.profile?.picture?.original?.url || '') || defaultProfileImage"
         :alt="publication.metadata.name || publication.profile.handle"
       />
       <p class="cardProfileProfileName">
@@ -50,7 +50,8 @@ const openProfilePage = (id: string) =>
 
 defineProps<Props>();
 
-const defaultProfileImage = 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
+const defaultProfileImage =
+  'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg';
 </script>
 
 <style>

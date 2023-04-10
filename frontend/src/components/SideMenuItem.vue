@@ -1,7 +1,9 @@
 <template>
   <div :class="[`side-menu-layout-12`, className || ``]" @click="emit('navigation-click')">
-    <icon :name="icon"></icon>
-    <div class="search-1 nunito-normal-white-15px">{{ listItem }}</div>
+    <icon :name="icon" />
+    <div class="search-1 nunito-normal-white-15px">
+      {{ listItem }}
+    </div>
   </div>
 </template>
 

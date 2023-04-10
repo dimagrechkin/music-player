@@ -1,17 +1,21 @@
 <template>
   <div :class="[`side-menu-category-layout`, className || ``]">
     <div class="menu-icon">
-      <div class="grid-fill" :style="{ 'background-image': 'url(' + gridFill + ')' }"></div>
+      <div class="grid-fill" :style="{ 'background-image': `url(${gridFill})` }" />
     </div>
-    <div class="library-3 nunito-bold-white-17px">{{ library }}</div>
+    <div class="library-3 nunito-bold-white-17px">
+      {{ library }}
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "SideMenuCategoryLayout",
-  props: ["gridFill", "library", "className"],
-};
+<script lang="ts" setup>
+interface Props {
+  gridFill: string;
+  library: string;
+  className: string;
+}
+defineProps<Props>();
 </script>
 
 <style>

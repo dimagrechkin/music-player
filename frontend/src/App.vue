@@ -8,7 +8,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, computed } from 'vue';
+import { onMounted } from 'vue';
 import { useRefreshMutation } from './graphql/generated';
 import { isTokenExpire } from './lib/auth/helpers';
 import { useCryptoStore } from './stores/crypto';
@@ -23,8 +23,6 @@ onMounted(() => {
 
 const store = useCryptoStore();
 
-const isLoggedIn = computed(() => !!store.account);
-
 const { mutate: getToken } = useRefreshMutation();
 
 const refreshAccessToken = async () => {
@@ -38,7 +36,7 @@ const refreshAccessToken = async () => {
       },
     });
 
-    const { accessToken, refreshToken: newRefreshToken } = result?.data?.refresh;
+    const { accessToken, refreshToken: newRefreshToken } = result?.data?.refresh ?? '';
 
     store.setAccessToken(accessToken, newRefreshToken);
 

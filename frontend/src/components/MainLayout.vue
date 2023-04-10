@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col">
     <top-nav-bar />
-    <router-view :key="$route.path"></router-view>
+    <router-view :key="$route.path" />
   </div>
 </template>
 <script setup lang="ts">

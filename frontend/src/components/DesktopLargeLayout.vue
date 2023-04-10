@@ -1,11 +1,15 @@
 <template>
-  <div class="desktop-large-layout" v-for="publication in publications">
+  <div v-for="publication in publications" :key="publication.id" class="desktop-large-layout">
     <div class="overlap-group-1">
       <div class="overlap-group-2">
         <img class="rectangle-3" :src="defaultProfileImage" alt="Rectangle" />
       </div>
-      <div class="my-favorite-songs nunito-normal-white-15px-2">{{ publication.metadata.content }}</div>
-      <div class="my-favorite-songs2 nunito-normal-white-15px-2">{{ publication.metadata.description }}</div>
+      <div class="metadata-content nunito-normal-white-15px-2">
+        {{ publication.metadata.content }}
+      </div>
+      <div class="metadata-description nunito-normal-white-15px-2">
+        {{ publication.metadata.description }}
+      </div>
     </div>
   </div>
 </template>
@@ -93,7 +97,7 @@ const defaultProfileImage =
   width: 9px;
 }
 
-.my-favorite-songs {
+.metadata-content {
   left: 12px;
   letter-spacing: 0;
   line-height: 18px;
@@ -102,7 +106,7 @@ const defaultProfileImage =
   white-space: nowrap;
 }
 
-.my-favorite-songs2 {
+.metadata-description {
   right: 22px;
   letter-spacing: 0;
   line-height: 18px;

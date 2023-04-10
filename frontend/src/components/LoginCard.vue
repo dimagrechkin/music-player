@@ -1,8 +1,12 @@
 <template>
   <div class="login-card">
-    <div class="overlap-group-top-card" :style="{ 'background-image': 'url(' + backgroundImage + ')' }">
-      <h1 class="title">{{ title }}</h1>
-      <p class="sub-title">{{ subTitle }}</p>
+    <div class="overlap-group-top-card" :style="{ 'background-image': `url(${backgroundImage})` }">
+      <h1 class="title">
+        {{ title }}
+      </h1>
+      <p class="sub-title">
+        {{ subTitle }}
+      </p>
       <div class="button-container">
         <button class="button" :onclick="refetchChallenge">
           <span class="connect nunito-medium-white-15px">{{ firstButtonText }}</span>
@@ -16,8 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-
-
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { ethers } from 'ethers';
@@ -27,13 +29,13 @@ import { useCryptoStore } from '@/stores/crypto';
 
 interface Props {
   title: string;
-  subTitle:string;
+  subTitle: string;
   firstButtonText: string;
-  secondButtonText:string;
+  secondButtonText: string;
 }
 
 defineProps<Props>();
-const backgroundImage = "src/images/discoverImage.jpg"
+const backgroundImage = 'src/assets/discoverImage.jpg';
 
 const cryptoStore = useCryptoStore();
 const { account } = storeToRefs(cryptoStore);
@@ -83,7 +85,6 @@ const loginAccount = async () => {
 
   setAccessToken(accessToken, refreshToken);
 };
-
 </script>
 
 <style>
@@ -145,7 +146,7 @@ const loginAccount = async () => {
   padding: 8px 28px;
 }
 
-.connect{
+.connect {
   font-weight: 500;
   letter-spacing: 0;
   line-height: 18px;

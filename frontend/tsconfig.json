@@ -5,6 +5,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
+    "skipLibCheck": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -17,13 +18,15 @@
       "@/*": ["src/*"]
     }
   },
+  "exclude": ["node_modules"],
   "include": [
+    "vite.config.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.d.ts"
-  ],
-  "exclude": ["node_modules"]
+    "global.d.ts",
+    "tests/unit/example.test.js"
+  ]
 }
