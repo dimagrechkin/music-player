@@ -6,7 +6,7 @@
         class="path"
         src="https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-path-98BF93D2-948C-4452-A943-7D8AE8F149B7.png"
         alt="Path"
-      />
+      >
       <div class="library">
         <side-menu-selected-category-layout
           :overlap-group="mockedData.sideMenuSelectedCategoryLayoutProps.overlapGroup"
@@ -15,14 +15,14 @@
           :menu="mockedData.sideMenuSelectedCategoryLayoutProps.menu"
         />
         <side-menu-item
-          icon="Profile"
-          :list-item="mockedData.sideMenuLayoutProps.profiles"
-          @navigation-click="moveToHomePage"
-        />
-        <side-menu-item
           icon="Plus"
           :list-item="mockedData.sideMenuLayoutProps.createPost"
           @navigation-click="moveToCreatePage"
+        />
+        <side-menu-item
+          icon="Profile"
+          :list-item="mockedData.sideMenuLayoutProps.createProfile"
+          @navigation-click="moveToCreateProfilePage"
         />
       </div>
     </div>
@@ -44,9 +44,9 @@ const moveToCreatePage = () =>
     name: appConfig.routes.create,
   });
 
-const moveToHomePage = () =>
+  const moveToCreateProfilePage = () =>
   router.push({
-    name: 'base-path',
+    name: appConfig.routes.createProfile,
   });
 </script>
 

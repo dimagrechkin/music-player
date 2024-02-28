@@ -1,11 +1,24 @@
 <template>
   <div class="side-menu-selected-category-layout">
     <div class="overlap-group1">
-      <div class="overlap-group" :style="{ 'background-image': `url(${overlapGroup})` }">
-        <img class="base" :src="base" alt="Base" />
+      <div
+        class="overlap-group"
+        :style="{ 'background-image': `url(${overlapGroup})` }"
+      >
+        <img
+          class="base"
+          :src="base"
+          alt="Base"
+        >
       </div>
-      <div class="icon">
-        <div class="home-fill" :style="{ 'background-image': `url(${homeFill})` }" />
+      <div
+        class="icon"
+        @click="moveToHomePage"
+      >
+        <div
+          class="home-fill"
+          :style="{ 'background-image': `url(${homeFill})` }"
+        />
       </div>
       <div class="menu nunito-bold-white-17px">
         {{ menu }}
@@ -15,6 +28,8 @@
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
+
 interface Props {
   overlapGroup: string;
   base: string;
@@ -22,6 +37,13 @@ interface Props {
   menu: string;
 }
 defineProps<Props>();
+
+const router = useRouter();
+
+const moveToHomePage = () =>
+  router.push({
+    name: 'base-path',
+  });
 </script>
 
 <style>

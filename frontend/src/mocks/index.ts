@@ -12,6 +12,7 @@ const sideMenuLayoutData = {
     'https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-search-E0EA35DC-64C7-4784-951A-C5BD528C45D3@2x.png',
   profiles: 'Profiles',
   createPost: 'Create Post',
+  createProfile: 'Create Profile'
 };
 
 const desktopTopNavigationData = {
@@ -36,7 +37,7 @@ const topLeftNavigationData = {
 };
 
 const desktopTopCardData = {
-  title: 'Use Lens Protocol wtih your friends',
+  title: 'Use Lens Protocol with your friends',
   subTitle: 'Connect Metamask and login to your Lens profile or Create Lens Profile',
   firstButtonText: 'Connect Metamask',
   secondButtonText: 'Login Lens',
@@ -88,7 +89,7 @@ export const mockedData = {
     'https://anima-uploads.s3.amazonaws.com/projects/64149f18b07195ba5e7e1f9f/releases/641842c9202b1f222d9ddf3f/img/medium-copy-2-rectangle-0EF56B5E-A934-409A-BE30-153C0D7635A8.png',
   recentlyPlay: 'Recently Play',
   friendActivity: 'Friend Activity',
-  address: '320 Friends',
+  address: '0 Followers',
   sideMenuSelectedCategoryLayoutProps: sideMenuSelectedCategoryLayoutData,
   sideMenuLayoutProps: sideMenuLayoutData,
   desktopTopNavigationProps: desktopTopNavigationData,

@@ -1,12 +1,13 @@
 <template>
   <div :class="[`friend-layout`, selected || ``]">
-    <div class="flex-row-1">
+    <!-- <div class="flex-row-1">
       <div class="overlap-group-3">
         <img class="oval-4" :src="mockedFriendPicture" alt="mockedFriend" />
       </div>
       <p class="jason-harry-listenin nunito-normal-white-15px-2" v-html="activity" />
     </div>
-    <div class="rectangle-6" />
+    <div class="rectangle-6" /> -->
+    No followers
   </div>
 </template>
 

@@ -1,11 +1,11 @@
 import omitDeep from 'omit-deep';
 import { TypedDataDomain } from '@ethersproject/abstract-signer';
-import { ethers, Wallet } from 'ethers';
+import { ethers } from 'ethers';
 
-export const ethersProvider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/');
+export const ethersProvider = new ethers.providers.Web3Provider(window.ethereum);
 
 export const getSigner = () => {
-  return new Wallet(String(import.meta.env.VITE_PK) as string, ethersProvider);
+  return ethersProvider.getSigner()
 };
 
 export const imgConverter = (url: string) => {
@@ -16,7 +16,8 @@ export const imgConverter = (url: string) => {
 export function omitTypename(object: any) {
   return omitDeep(object, ['__typename']);
 }
-const signer = getSigner();
+
+export const signer = getSigner();
 
 export const signedTypeData = (domain: TypedDataDomain, types: Record<string, any>, value: Record<string, any>) => {
   // remove the __typedname from the signature!

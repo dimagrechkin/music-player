@@ -1,5 +1,10 @@
 <template>
-  <div v-if="isLoadingProfile" class="white-text">Loading Profile ...</div>
+  <div
+    v-if="isLoadingProfile"
+    class="white-text"
+  >
+    Loading Profile ...
+  </div>
   <div class="profile-container">
     <div class="profile-content-container">
       <img
@@ -7,14 +12,14 @@
         :src="imgConverter(profilesData?.profile?.coverPicture?.original?.url || '')"
         :alt="profilesData?.profile?.name || profilesData?.profile?.handle || ''"
         class="cover-image-container"
-      />
+      >
 
       <img
         v-if="!!profilesData?.profile?.picture?.original.url"
         :src="imgConverter(profilesData?.profile?.picture?.original.url || '')"
         :alt="profilesData?.profile?.name || profilesData?.profile?.handle || ''"
         class="profile-picture-container"
-      />
+      >
 
       <h1 class="white-text profile-name">
         {{ profilesData?.profile?.name || 'Unknown User' }}
@@ -25,19 +30,33 @@
       <p class="white-text profile-description">
         {{ profilesData?.profile?.bio || 'unknownuser' }}
       </p>
-      <p class="white-text follower-count">{{ profilesData?.profile?.stats.totalFollowers }}{{ ' Followers' }}</p>
+      <p class="white-text follower-count">
+        {{ profilesData?.profile?.stats.totalFollowers }}{{ ' Followers' }}
+      </p>
     </div>
   </div>
-  <button class="white-text">213</button>
+  <button class="white-text">
+    213
+  </button>
   <div class="publications-container">
-    <div v-if="isLoadingPublications" class="white-text">Loading publications ...</div>
+    <div
+      v-if="isLoadingPublications"
+      class="white-text"
+    >
+      Loading publications ...
+    </div>
     <card-profile
       v-for="publication in publicationsData?.publications.items"
       :key="publication.id"
       :publication="publication"
     />
   </div>
-  <div v-if="profileError || publicationsError" class="white-text">Couldn't find this profile</div>
+  <div
+    v-if="profileError || publicationsError"
+    class="white-text"
+  >
+    Couldn't find this profile
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -128,6 +147,7 @@ onResult(async () => {
       ],
     },
   });
+  
   const { domain, types, value } = typedData?.value?.data?.createFollowTypedData?.typedData ?? undefined;
 
   signature.value = await signedTypeData(domain, types, value);

@@ -1,8 +1,16 @@
 <template>
-  <div v-for="publication in publications" :key="publication.id" class="desktop-large-layout">
+  <div
+    v-for="publication in publications"
+    :key="publication.id"
+    class="desktop-large-layout"
+  >
     <div class="overlap-group-1">
       <div class="overlap-group-2">
-        <img class="rectangle-3" :src="defaultProfileImage" alt="Rectangle" />
+        <img
+          class="rectangle-3"
+          :src="defaultProfileImage"
+          alt="Rectangle"
+        >
       </div>
       <div class="metadata-content nunito-normal-white-15px-2">
         {{ publication.metadata.content }}
@@ -16,6 +24,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+import {sdkClient} from '../utils/lens-gated-sdk'
 import { PublicationSortCriteria, useExplorePublicationsQuery } from '@/graphql/generated';
 
 interface Props {
@@ -31,7 +40,97 @@ const { result } = useExplorePublicationsQuery({
   },
 });
 
+
+
+
 const publications = computed(() => result.value?.explorePublications.items);
+
+const gatedPublications = computed(() => result.value?.explorePublications.items.filter((publ)=>publ.isGated).map((item)=> item.metadata));
+console.log(gatedPublications, 'publications');
+
+const decrypted  = await sdkClient.gated.decryptMetadata({
+    "__typename": "MetadataOutput",
+    "name": "dimaEnc",
+    "description": "dimaEnc",
+    "content": "This publication is gated",
+    "media": [],
+    "attributes": [],
+    "encryptionParams": {
+        "__typename": "EncryptionParamsOutput",
+        "providerSpecificParams": {
+            "__typename": "ProviderSpecificParamsOutput",
+            "encryptionKey": "9bff1b30d23ebbc577093a2c03906c829aca0f8fd115618fabaeb0ef451a94035fdbacd204222359550b4fb4c48598117a2bb9620abc40f6f6b889c0d35d30e9fee879701b796bb822283b7d9b03b1302c9010d6c44f4264e05d9b4b6b793cb924b6f3c1b727d617685c49529d20496ae0fd3138bab55b6819b17e54c7788461000000000000002098e09a27cb34b9c235ae216a7500acd7f561afc38486f9d2daab1f8a127ddbf6f18c6da0150a2cec1c5fc3c30145c2a9"
+        },
+        "accessCondition": {
+            "__typename": "AccessConditionOutput",
+            "nft": null,
+            "eoa": null,
+            "token": null,
+            "profile": null,
+            "follow": null,
+            "collect": null,
+            "and": null,
+            "or": {
+                "__typename": "OrConditionOutput",
+                "criteria": [
+                    {
+                        "__typename": "AccessConditionOutput",
+                        "and": null,
+                        "or": null,
+                        "nft": null,
+                        "eoa": null,
+                        "token": null,
+                        "profile": {
+                            "__typename": "ProfileOwnershipOutput",
+                            "profileId": "0x75f7"
+                        },
+                        "follow": null,
+                        "collect": null
+                    },
+                    {
+                        "__typename": "AccessConditionOutput",
+                        "and": null,
+                        "or": null,
+                        "nft": {
+                            "__typename": "NftOwnershipOutput",
+                            "contractAddress": "0x43cFEdfD829a4d729164c807a787517a6f53F02B",
+                            "chainID": 80001,
+                            "contractType": "ERC721",
+                            "tokenIds": []
+                        },
+                        "eoa": null,
+                        "token": null,
+                        "profile": null,
+                        "follow": null,
+                        "collect": null
+                    }
+                ]
+            }
+        },
+        "encryptedFields": {
+            "__typename": "EncryptedFieldsOutput",
+            "animation_url": null,
+            "content": "dtXiVJtVVj6KLIKtSdhuIucPfLKG8CfEHa3SIK_pr9c=",
+            "external_url": null,
+            "image": null,
+            "media": null
+        }
+    }
+})
+  // console.log(error) // in case something went wrong or you dont fullfill the criteria
+  console.log(decrypted) // otherwise, the decrypted MetadataV2 will be here
+
+// publications.value?.map(async(puplication)=> {
+//   const { error, decrypted } = await sdkClient.gated.decryptMetadata(puplication.metadata)
+// console.log(error) // in case something went wrong or you dont fullfill the criteria
+// console.log(decrypted) // otherwise, the decrypted MetadataV2 will be here
+// return puplication;
+// })
+
+// const { error, decrypted } = await sdkClient.gated.decryptMetadata(encryptedMetadata)
+// console.log(error) // in case something went wrong or you dont fullfill the criteria
+// console.log(decrypted) // otherwise, the decrypted MetadataV2 will be here
+
 const defaultProfileImage =
   'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg';
 </script>

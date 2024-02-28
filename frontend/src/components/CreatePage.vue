@@ -2,19 +2,43 @@
   <div class="container">
     <div class="form-container">
       <div class="input-container">
-        <input ref="file" type="file" @change="handleFileUpload()" />
+        <input
+          ref="file"
+          type="file"
+          @change="handleFileUpload()"
+        >
       </div>
       <div class="input-container">
-        <input v-model="text" type="text" placeholder="Title" />
+        <input
+          v-model="text"
+          type="text"
+          placeholder="Title"
+        >
       </div>
       <div class="input-container">
-        <textarea v-model="description" placeholder="Description" />
+        <textarea
+          v-model="description"
+          placeholder="Description"
+        />
       </div>
       <div class="input-container">
-        <textarea v-model="content" placeholder="Content" />
+        <textarea
+          v-model="content"
+          placeholder="Content"
+        />
       </div>
-      <div class="input-container white center" @click="onPost">apply</div>
-      <div v-if="validationError" class="white">please fill every field</div>
+      <div
+        class="input-container white center"
+        @click="onPost"
+      >
+        apply
+      </div>
+      <div
+        v-if="validationError"
+        class="white"
+      >
+        please fill every field
+      </div>
     </div>
   </div>
 </template>
@@ -24,6 +48,8 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { v4 as uuidv4 } from 'uuid';
 import { ethers } from 'ethers';
+import {AndCondition, OrCondition, FollowCondition, CollectCondition, EncryptedMetadata, EoaOwnership, Erc20TokenOwnership, MetadataV2, NftOwnership, ProfileOwnership, PublicationMainFocus, ContractType, ScalarOperator, LensGatedSDK, LensEnvironment,  } from '@lens-protocol/sdk-gated'
+
 
 import {
   useCreatePostTypedDataMutation,
@@ -31,9 +57,8 @@ import {
   useDefaultProfileQuery,
   useChallengeQuery,
 } from '@/graphql/generated';
-import { PublicationMainFocus } from '@/interfaces/publication';
 import { useCryptoStore } from '@/stores/crypto';
-import { signedTypeData } from '@/utils/helpers';
+import { ethersProvider, signedTypeData, getSigner as getSigner2  } from '@/utils/helpers';
 import { Metadata } from '@/interfaces/publication';
 import { splitSignature } from '@ethersproject/bytes';
 
@@ -106,25 +131,101 @@ const { result } = useDefaultProfileQuery(
   }
 );
 
+// ENCRYPT POST
+
+
+
+
+
 const onPost = async () => {
   validationError.value = false;
   if (description.value && text.value && content.value) {
     await loginAccount();
-    const ipfsResult = await uploadIpfs<Metadata>({
+
+    // const ipfsResult = await uploadIpfs<Metadata>({
+    //   version: '2.0.0',
+    //   mainContentFocus: PublicationMainFocus.TEXT_ONLY,
+    //   metadata_id: uuidv4(),
+    //   description: description.value,
+    //   locale: 'en-US',
+    //   content: content.value,
+    //   external_url: null,
+    //   image: null,
+    //   imageMimeType: null,
+    //   name: text.value,
+    //   attributes: [],
+    //   tags: [],
+    //   appId: 'lens_protocol_dima',
+    // });
+
+
+
+    
+    let metadata: MetadataV2 = {
       version: '2.0.0',
-      mainContentFocus: PublicationMainFocus.TEXT_ONLY,
-      metadata_id: uuidv4(),
-      description: description.value,
-      locale: 'en-US',
-      content: content.value,
-      external_url: null,
-      image: null,
-      imageMimeType: null,
       name: text.value,
+      description: description.value,
       attributes: [],
-      tags: [],
+      content: content.value,
+      metadata_id: uuidv4(),
       appId: 'lens_protocol_dima',
-    });
+      mainContentFocus: PublicationMainFocus.TextOnly,
+      locale: 'en',
+    }
+
+    // let metadata: MetadataV2 = {
+//   version: '2.0.0',
+//   name: 'name',
+//   description: 'description',
+//   attributes: [],
+//   content: 'content',
+//   metadata_id: '1',
+//   appId: 'app_id',
+//   mainContentFocus: PublicationMainFocus.TextOnly,
+//   locale: 'en',
+// }
+
+const uploadMetadataHandler = async (data: EncryptedMetadata): Promise<string> => {
+  // Upload the encrypted metadata to your server and return a publicly accessible url
+  return uploadIpfs(data);
+}
+
+const nftAccessCondition: NftOwnership = {
+  contractAddress: '0x43cFEdfD829a4d729164c807a787517a6f53F02B', // the address of the NFT collection, make sure it is a valid address depending on the chosen network
+  chainID: 80001, // the chain ID of the network the NFT collection is deployed on;
+  contractType: ContractType.Erc721, // the type of the NFT collection, ERC721 and ERC1155 are supported
+}
+
+  const sdk = await LensGatedSDK.create({
+    provider: ethersProvider,
+    signer: getSigner2(),
+    env: LensEnvironment.Mumbai,
+  });
+  
+  console.log(sdk, 'sdk');
+
+  // this must be called anytime you change networks, exposed so you can add this to your Web3Provider event handling
+  // but not necessary to call explicitly
+
+  // await sdk.connect({
+  //   address: '0x1234123412341234123412341234123412341234', // your signer's wallet address
+  //   env: LensEnvironment.Mumbai
+  // })
+
+  const { contentURI, encryptedMetadata } = await sdk.gated.encryptMetadata(
+          metadata,
+          result.value?.defaultProfile?.id, // the signed in user's profile id
+          {
+            nft: nftAccessCondition
+          }, // or any other access condition object
+          uploadMetadataHandler,
+  )
+  console.log(contentURI)
+  console.log(encryptedMetadata)
+  // contentURI is ready to be used in the `contentURI` field of your `createPostTypedMetadata` call
+  // also exposing the encrypted metadata in case you want to do something with it
+  // ... create post using the Lens API ...
+
 
     const typedData = await requestTypedData({
       request: {
@@ -133,11 +234,16 @@ const onPost = async () => {
             followerOnly: false,
           },
         },
-        contentURI: `ipfs://${ipfsResult.path}`,
+        contentURI: 'ipfs://' + contentURI?.path,
         profileId: result.value?.defaultProfile?.id,
         referenceModule: {
           followerOnlyReferenceModule: false,
         },
+        gated: {
+      nft: nftAccessCondition,
+      encryptedSymmetricKey:
+        encryptedMetadata?.encryptionParams.providerSpecificParams.encryptionKey,
+    },
       },
     });
 

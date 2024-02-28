@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "init": "^0.1.2",
+    "zx": "^7.2.2"
+  },
+  "scripts": {
+    "start": "nodemon server.js",
+    "hardhat": "cd .. && cd hardhat && npx hardhat run --network mumbai scripts/deploy.js"
+  }
+}

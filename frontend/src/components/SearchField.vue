@@ -1,10 +1,40 @@
 <template>
   <div class="clearable-input">
     <span data-clear-input><icon name="Search" /></span>
-    <input type="search" placeholder="Search" />
+    <search-input
+      ref="searchInputRef"
+      v-model="searchValue"
+    />
   </div>
 </template>
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
+import {
+SearchRequestTypes,
+  useSearchProfilesQuery
+} from '@/graphql/generated';
+import SearchInput from '@/components/SearchInput.vue';
 
+const searchValue = ref('');
+
+const searchInputRef = ref<InstanceType<typeof SearchInput>>();
+
+
+const { result: searchResult, refetch } = useSearchProfilesQuery(
+  ()=>({
+    request: {type: SearchRequestTypes.Profile, query: searchValue.value, sources: 'lens_protocol_dima', }
+  })
+  );
+  
+  defineExpose({
+  searchInputRef,
+  searchResult
+  });
+
+watch(searchValue, () => {
+  refetch();
+});
+</script>
 <style>
 .clearable-input {
   position: relative;

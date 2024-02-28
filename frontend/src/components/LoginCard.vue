@@ -1,6 +1,9 @@
 <template>
   <div class="login-card">
-    <div class="overlap-group-top-card" :style="{ 'background-image': `url(${backgroundImage})` }">
+    <div
+      class="overlap-group-top-card"
+      :style="{ 'background-image': `url(${backgroundImage})` }"
+    >
       <h1 class="title">
         {{ title }}
       </h1>
@@ -8,11 +11,23 @@
         {{ subTitle }}
       </p>
       <div class="button-container">
-        <button class="button" :onclick="refetchChallenge">
+        <button
+          class="button"
+          :onclick="refetchChallenge"
+        >
           <span class="connect nunito-medium-white-15px">{{ firstButtonText }}</span>
         </button>
-        <button class="button" :onclick="loginAccount">
+        <button
+          class="button"
+          :onclick="loginAccount"
+        >
           <span class="connect nunito-medium-white-15px">{{ secondButtonText }}</span>
+        </button>
+        <button
+          class="button"
+          :onclick="setProAccess"
+        >
+          <span class="connect nunito-medium-white-15px">Pro Access</span>
         </button>
       </div>
     </div>
@@ -22,10 +37,15 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { ethers } from 'ethers';
+import { getSigner, signer } from '@/utils/helpers';
 import { useChallengeQuery, useAuthenticateMutation } from '@/graphql/generated';
+import {AndCondition, OrCondition, FollowCondition, CollectCondition, EncryptedMetadata, EoaOwnership, Erc20TokenOwnership, MetadataV2, NftOwnership, ProfileOwnership, PublicationMainFocus, ContractType, ScalarOperator, LensGatedSDK, LensEnvironment,  } from '@lens-protocol/sdk-gated'
+import contract from "../contracts/Polygonum.json"
+import { ContractFactory } from 'ethers';
 
+import { nftHub } from '../utils/nft-hub';
 import { useCryptoStore } from '@/stores/crypto';
+
 
 interface Props {
   title: string;
@@ -35,12 +55,16 @@ interface Props {
 }
 
 defineProps<Props>();
+
+console.log(nftHub, 'nftHub');
+
+
 const backgroundImage = 'src/assets/discoverImage.jpg';
 
 const cryptoStore = useCryptoStore();
 const { account } = storeToRefs(cryptoStore);
 
-let signature = ref<string>();
+const signature = ref<string>();
 
 const { result, refetch } = useChallengeQuery(
   () => ({
@@ -58,10 +82,6 @@ const refetchChallenge = async () => {
   await refetch();
 };
 
-const getSigner = () => {
-  return new ethers.Wallet(String(import.meta.env.VITE_PK) as string);
-};
-
 const signText = (text: string) => {
   return getSigner().signMessage(text);
 };
@@ -70,7 +90,7 @@ const { mutate: sendSignedMessage } = useAuthenticateMutation();
 
 const { setAccountAddress, setAccessToken } = useCryptoStore();
 
-const loginAccount = async () => {
+const loginAccount = async () => {  
   await signText(result?.value?.challenge.text);
   signature.value = await signText(result?.value?.challenge.text);
 
@@ -84,6 +104,23 @@ const loginAccount = async () => {
   const { accessToken, refreshToken } = data.authenticate;
 
   setAccessToken(accessToken, refreshToken);
+};
+
+const contractAbi = contract.abi
+const contractByteCode = contract.bytecode
+
+const setProAccess = async () => {
+  try {
+    const factory = new ContractFactory(contractAbi, contractByteCode, signer);
+    console.log(factory, 'factory');
+    const PolygonumContract = await factory.deploy();
+    console.log(PolygonumContract.address, '1233333');
+    
+  } catch (error) {
+    console.error(error);
+  }
+
+  
 };
 </script>
 
