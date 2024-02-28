@@ -1,7 +1,7 @@
 <template>
   <div :class="styles.activityCard">
     <div :class="styles.profileAvatarContainer">
-      <!-- <Image alt="" src="{avatar}" :class-name="{styles.avatar}" width="{50}" height="{50}" />  TODO  -->
+      <img alt="" :src="avatar" :width="50" :height="50" />
     </div>
     <div>
       <div>{{ title }}</div>
@@ -13,6 +13,7 @@
 interface Props {
   title: string;
   subTitle: string;
+  avatar: string;
 }
 defineProps<Props>();
 const styles = {

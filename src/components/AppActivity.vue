@@ -2,7 +2,7 @@
   <div :class="styles.activity">
     <div :class="styles.title">
       Friend Activity
-      <img src="assets/friend.svg" alt="" />
+      <img src="@/assets/friend.svg" alt="" />
     </div>
 
     <div class="mb-10">
