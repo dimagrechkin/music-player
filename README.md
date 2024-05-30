@@ -1,4 +1,4 @@
-# Music Player social network
+# Music Player Social Network
 Web3 blockchain social network:
 - The platform helps creators publish any kind of digital art. Also implemented a subscription system  for private publications.
 
